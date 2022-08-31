@@ -1,9 +1,26 @@
 
 body {
   margin: 0;
-  font-family: "Montserrat";
+  font-family: "Raleway";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: "Crimson Pro";
+}
+h2 {
+  font-family: "Crimson Pro";
+}
+h3 {
+  font-family: "Crimson Pro";
+}
+h4 {
+  font-family: "Crimson Pro";
+}
+
+button {
+  font-family: "Raleway";
 }
 
 code {

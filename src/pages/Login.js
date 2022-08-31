@@ -2,11 +2,13 @@ import { useState } from "react";
 import services from "../lib/api";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../lib/context";
+import styled from "styled-components";
+import { Logo } from "../components";
 
 function Login() {
   /* On décide de stocker les infos du formulaire dans un State. */
 
-  const { setConnected } = useStateContext();
+  const { setConnected, setCurrentUserInfo } = useStateContext();
 
   const navigate = useNavigate();
 
@@ -37,9 +39,11 @@ function Login() {
     services
       .login(body)
       .then((result) => {
-        const { jwt } = result;
+        const { jwt, userInfo } = result;
+
         localStorage.setItem("jwt", jwt);
         setConnected(true);
+        setCurrentUserInfo(userInfo);
         navigate("/home");
       })
       .catch((err) => {
@@ -49,28 +53,83 @@ function Login() {
   }
 
   return (
-    <div>
+    <LoginWrapper>
+      <Logo />
+      <h1>Connexion</h1>
       <form
         className="formLogin"
         onSubmit={handleSubmitLogin}
         onChange={handleChangeInput}
       >
-        <input
+        <StyledInput
           className="inputLogin"
           type="email"
           name="mail"
           placeholder="Votre email"
         />
-        <input
+        <StyledInput
           className="inputLogin"
           type="password"
           name="password"
           placeholder="Votre mot de passe"
         />
-        <button className="buttonLogin">Se connecter</button>
+        <button>se connecter</button>
       </form>
-    </div>
+      <div>
+        <p>
+          "Je me suis planté je voulais cliquer sur{" "}
+          <a href="/register">m'inscrire</a>"
+        </p>
+      </div>
+    </LoginWrapper>
   );
 }
 
 export default Login;
+
+const LoginWrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  input {
+    display: flex;
+    margin: 1rem;
+  }
+  button {
+    padding: 0.5rem;
+    background-color: #000000;
+    color: #ffedd6;
+    font-size: 0.7rem;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: #000000;
+  }
+  p {
+    font-size: small;
+    margin-top: 1rem;
+  }
+`;
+
+const StyledInput = styled.input`
+  padding: 0.5rem;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+`;
+
+const StyledButton = styled.button`
+  padding: 0.5rem;
+  background-color: #000000;
+  color: #ffedd6;
+  font-size: 1rem;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: #000000;
+`;
+
+const InputFlex = styled.div`
+  display: flex;
+`;

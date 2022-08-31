@@ -8,6 +8,8 @@ export const StateContext = ({ children }) => {
   //State creation
   const [connected, setConnected] = useState(false);
   const [bookListCurrentUser, setBookListCurrentUser] = useState([]);
+  const [currentUserInfo, setCurrentUserInfo] = useState();
+  const [friendList, setCurrentUsersFriendList] = useState([]);
 
   //Functions :
 
@@ -34,6 +36,14 @@ export const StateContext = ({ children }) => {
     );
   } */
 
+  async function fetchFriendList() {
+    const body = { currentUser: currentUserInfo._id };
+
+    await services.getFriendList(body).then((result) => {
+      setCurrentUsersFriendList(result);
+    });
+  }
+
   return (
     <Context.Provider
       value={{
@@ -41,6 +51,10 @@ export const StateContext = ({ children }) => {
         setConnected,
         fetchAndSetBooks,
         bookListCurrentUser,
+        setCurrentUserInfo,
+        currentUserInfo,
+        fetchFriendList,
+        friendList,
       }}
     >
       {children}

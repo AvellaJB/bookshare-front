@@ -5,7 +5,7 @@ import styled from "styled-components";
 function Home() {
   return (
     <HomeWrapper>
-      <h1>Ma bibliothèque</h1>
+      <h2>Ma bibliothèque</h2>
       <Library userType={"user"} />
       <ISBNInput />
       <Navbar />
@@ -19,7 +19,7 @@ const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  h1 {
+  h2 {
     text-align: center;
     padding: 2rem;
   }

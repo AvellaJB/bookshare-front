@@ -18,7 +18,7 @@ function Navbar() {
         </Link>
       </div>
       <div>
-        <Link to="/trade">
+        <Link to="/lendings">
           <FaExchangeAlt />
         </Link>
       </div>

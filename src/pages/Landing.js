@@ -2,16 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { GoBook } from "react-icons/go";
 import { AiOutlineDown } from "react-icons/ai";
-import { LoginButton, RegisterButton } from "../components";
+import { LoginButton, RegisterButton, Logo } from "../components";
 
 function Landing() {
   return (
     <div>
       <div>
-        <LogoDiv>
-          <GoBook />
-          <span>BOOKSHARE</span>
-        </LogoDiv>
+        <Logo />
         <HeroText>
           <Welcome>
             <span>Bienvenue sur BOOKSHARE</span>L'application de partage de
@@ -32,21 +29,8 @@ function Landing() {
 
 export default Landing;
 
-const LogoDiv = styled.div`
-  padding: 2rem;
-  height: 5vh;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  span {
-    transform: translate(0px, -2px);
-    margin-left: 5px;
-  }
-`;
-
 const HeroText = styled.div`
-  height: 80vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   background-color: blue;

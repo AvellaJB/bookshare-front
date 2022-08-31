@@ -34,6 +34,21 @@ const services = {
       .get("/bibliotheque", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => res.data);
   },
+
+  getAllUsers() {
+    const token = localStorage.getItem("jwt");
+    return base
+      .get("/users", { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => res.data);
+  },
+  getFriendList(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/friend-list", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;

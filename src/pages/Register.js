@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import services from "../lib/api";
 import { useNavigate } from "react-router-dom";
+import { Logo } from "../components";
 
 function Register() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function Register() {
       .register(body)
       .then(() => {
         alert("User Created.");
-        navigate("/home");
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -37,8 +38,12 @@ function Register() {
   }
 
   return (
-    <div>
+    <RegisterWrapper>
       <form onSubmit={handleSubmitLogin} onChange={handleChangeInput}>
+        <Logo />
+        <div>
+          <h1>Inscription</h1>
+        </div>
         <input
           className="inputRegister"
           placeholder="Votre pseudo"
@@ -63,9 +68,9 @@ function Register() {
           type="password"
           name="confirmPassword"
         />
-        <Button className="buttonRegister">Envoyer</Button>
+        <Button className="buttonRegister">envoyer</Button>
       </form>
-    </div>
+    </RegisterWrapper>
   );
 }
 
@@ -73,11 +78,29 @@ export default Register;
 
 const Button = styled.button`
   padding: 0.5rem;
-  background-color: #1fdf64;
-  color: #222222;
-  font-size: 1rem;
-  font-weight: bold;
+  background-color: #000000;
+  color: #ffedd6;
+  font-size: 0.7rem;
   border-radius: 12px;
   border-width: 1px;
-  border-color: #1fdf64;
+  border-color: #000000;
+`;
+
+const RegisterWrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  input {
+    padding: 0.5rem;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
 `;
