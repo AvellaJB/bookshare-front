@@ -1,26 +1,23 @@
 import React, { useEffect } from "react";
-import { Navbar, Friend } from "../components";
-import services from "../lib/api";
+import {
+  Navbar,
+  Friend,
+  UserSearchInput,
+  FriendList,
+  UserSearchList,
+} from "../components";
 import { useStateContext } from "../lib/context";
 
 function Friends() {
-  const { fetchFriendList, friendList } = useStateContext();
-
-  console.log(friendList);
-  useEffect(() => {
-    fetchFriendList();
-  }, []);
+  const { searchingUser } = useStateContext();
 
   return (
     <div>
       <div>
-        <h1>Amis</h1>
+        <h2>Amis</h2>
       </div>
-      <div>
-        {friendList.map((friend) => {
-          return <Friend friendInfo={friend} />;
-        })}
-      </div>
+      {searchingUser ? <UserSearchList /> : <FriendList />}
+      <UserSearchInput />
       <Navbar />
     </div>
   );

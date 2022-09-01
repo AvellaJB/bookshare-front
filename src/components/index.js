@@ -8,3 +8,6 @@ export { default as Book } from "./Book";
 export { default as LogoutButton } from "./LogoutButton";
 export { default as Logo } from "./Logo";
 export { default as Friend } from "./Friend";
+export { default as UserSearchInput } from "./UserSearchInput";
+export { default as FriendList } from "./FriendList";
+export { default as UserSearchList } from "./UserSearchList";

@@ -10,6 +10,8 @@ export const StateContext = ({ children }) => {
   const [bookListCurrentUser, setBookListCurrentUser] = useState([]);
   const [currentUserInfo, setCurrentUserInfo] = useState();
   const [friendList, setCurrentUsersFriendList] = useState([]);
+  const [searchingUser, setSearchingUser] = useState(false);
+  const [searchUserResult, setSearchUserResult] = useState([]);
 
   //Functions :
 
@@ -38,7 +40,6 @@ export const StateContext = ({ children }) => {
 
   async function fetchFriendList() {
     const body = { currentUser: currentUserInfo._id };
-
     await services.getFriendList(body).then((result) => {
       setCurrentUsersFriendList(result);
     });
@@ -55,6 +56,10 @@ export const StateContext = ({ children }) => {
         currentUserInfo,
         fetchFriendList,
         friendList,
+        setSearchingUser,
+        searchingUser,
+        setSearchUserResult,
+        searchUserResult,
       }}
     >
       {children}

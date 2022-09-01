@@ -49,6 +49,15 @@ const services = {
       })
       .then((res) => res.data);
   },
+
+  SearchUser(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/user-query", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
