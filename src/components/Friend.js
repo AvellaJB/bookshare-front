@@ -10,8 +10,11 @@ function Friend({ friendInfo }) {
   const { friendList, currentUserInfo, friendRequestList } = useStateContext();
 
   const isInFriendList = friendList.find((o) => o._id === friendInfo._id);
-  const isInFriendRequest = friendRequestList.find(
+  const isSearchResultInFriendRequest = friendRequestList.find(
     (o) => o.recipient._id === friendInfo._id
+  );
+  const isInFriendRequest = friendRequestList.find(
+    (o) => o._id === friendInfo._id
   );
   const body = {
     requester: currentUserInfo._id,
@@ -20,11 +23,13 @@ function Friend({ friendInfo }) {
 
   let ActionButton;
 
-  console.log(isInFriendRequest);
-
-  if (isInFriendRequest?.status === 1) {
+  if (isSearchResultInFriendRequest?.status === 1) {
     ActionButton = <MdScheduleSend />;
-  } else if (isInFriendRequest) {
+  } else if (isInFriendRequest?.status === 1) {
+    ActionButton = <MdScheduleSend />;
+  } else if (isInFriendRequest?.status === 2) {
+    ActionButton = <HiOutlineCheck />;
+  } else if (isSearchResultInFriendRequest) {
     ActionButton = <HiOutlineCheck />;
   } else if (!isInFriendList) {
     ActionButton = (

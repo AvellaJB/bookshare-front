@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FriendResponse } from "../components";
+import { Friend } from "../components";
 import { useStateContext } from "../lib/context";
 
 function FriendRequestsList() {
@@ -12,7 +12,7 @@ function FriendRequestsList() {
   return (
     <div>
       {friendRequestList.map((friend) => {
-        return <FriendResponse friendInfo={friend} key={friend._id} />;
+        return <Friend friendInfo={friend} key={friend._id} />;
       })}
     </div>
   );
