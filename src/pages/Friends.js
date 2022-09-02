@@ -13,9 +13,6 @@ function Friends() {
 
   return (
     <div>
-      <div>
-        <h2>Amis</h2>
-      </div>
       {searchingUser ? <UserSearchList /> : <FriendList />}
       <UserSearchInput />
       <Navbar />

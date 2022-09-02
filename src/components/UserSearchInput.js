@@ -7,10 +7,6 @@ function UserSearchInput() {
   const [value, setValue] = useState("");
   const { setSearchingUser, setSearchUserResult } = useStateContext();
 
-  useEffect(() => {
-    console.log("test");
-  }, []);
-
   function getFormValue(elements, name) {
     return elements[name]?.value;
   }

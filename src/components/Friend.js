@@ -1,11 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { CgProfile } from "react-icons/cg";
+import { HiOutlineUserAdd } from "react-icons/hi";
+import { useStateContext } from "../lib/context";
 
 function Friend({ friendInfo }) {
+  const { searchingUser, friendList } = useStateContext();
+
+  const isInFriendList = friendList.find((o) => o._id === friendInfo._id);
+
   return (
     <FriendWrapper>
-      <CgProfile /> {friendInfo.pseudo}
+      <InteriorDiv>
+        <CgProfile /> {friendInfo.pseudo}
+        {!isInFriendList && <HiOutlineUserAdd />}
+      </InteriorDiv>
     </FriendWrapper>
   );
 }
@@ -13,16 +22,22 @@ function Friend({ friendInfo }) {
 export default Friend;
 
 const FriendWrapper = styled.div`
+  border-radius: 10px;
   background-color: aliceblue;
   margin-top: 2vh;
   margin-left: 10%;
   margin-right: 10%;
   padding: 1rem;
-  display: flex;
-  align-items: center;
   svg {
     font-size: 2rem;
-    align-items: center;
-    margin-right: 10%;
+    background-color: aliceblue;
   }
+`;
+
+const InteriorDiv = styled.div`
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 `;

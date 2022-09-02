@@ -12,7 +12,7 @@ export const StateContext = ({ children }) => {
   const [friendList, setCurrentUsersFriendList] = useState([]);
   const [searchingUser, setSearchingUser] = useState(false);
   const [searchUserResult, setSearchUserResult] = useState([]);
-
+  const [onFriendRestquests, setOnFriendRequestes] = useState(false);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -60,6 +60,8 @@ export const StateContext = ({ children }) => {
         searchingUser,
         setSearchUserResult,
         searchUserResult,
+        setOnFriendRequestes,
+        onFriendRestquests,
       }}
     >
       {children}
