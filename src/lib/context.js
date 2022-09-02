@@ -13,6 +13,7 @@ export const StateContext = ({ children }) => {
   const [searchingUser, setSearchingUser] = useState(false);
   const [searchUserResult, setSearchUserResult] = useState([]);
   const [friendRequestView, setFriendRequestView] = useState(false);
+  const [friendRequestList, setFriendRequestList] = useState([]);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -45,6 +46,14 @@ export const StateContext = ({ children }) => {
     });
   }
 
+  async function fetchFriendRequestList() {
+    const body = { currentUser: currentUserInfo._id };
+
+    await services.FriendRequestList(body).then((result) => {
+      setFriendRequestList(result);
+    });
+  }
+
   return (
     <Context.Provider
       value={{
@@ -62,6 +71,8 @@ export const StateContext = ({ children }) => {
         searchUserResult,
         friendRequestView,
         setFriendRequestView,
+        friendRequestList,
+        fetchFriendRequestList,
       }}
     >
       {children}

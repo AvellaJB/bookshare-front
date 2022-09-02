@@ -6,47 +6,19 @@ import { MdScheduleSend } from "react-icons/md";
 import { useStateContext } from "../lib/context";
 import services from "../lib/api";
 
-function Friend({ friendInfo }) {
-  const { friendList, currentUserInfo, friendRequestList } = useStateContext();
-
-  const isInFriendList = friendList.find((o) => o._id === friendInfo._id);
-  const isInFriendRequest = friendRequestList.find(
-    (o) => o.recipient._id === friendInfo._id
-  );
-  const body = {
-    requester: currentUserInfo._id,
-    recipient: friendInfo._id,
-  };
-
-  let ActionButton;
-
-  console.log(isInFriendRequest);
-
-  if (isInFriendRequest?.status === 1) {
-    ActionButton = <MdScheduleSend />;
-  } else if (isInFriendRequest) {
-    ActionButton = <HiOutlineCheck />;
-  } else if (!isInFriendList) {
-    ActionButton = (
-      <HiOutlineUserAdd
-        onClick={() => {
-          services.FriendRequest(body);
-        }}
-      />
-    );
-  }
-
+function FriendResponse({ friendInfo }) {
   return (
     <FriendWrapper>
       <InteriorDiv>
         <CgProfile /> {friendInfo.pseudo || friendInfo.recipient.pseudo}
-        {ActionButton}
+        {friendInfo.status === 2 && <HiOutlineCheck />}
+        {friendInfo.status === 1 && <MdScheduleSend />}
       </InteriorDiv>
     </FriendWrapper>
   );
 }
 
-export default Friend;
+export default FriendResponse;
 
 const FriendWrapper = styled.div`
   border-radius: 10px;
