@@ -11,3 +11,4 @@ export { default as Friend } from "./Friend";
 export { default as UserSearchInput } from "./UserSearchInput";
 export { default as FriendList } from "./FriendList";
 export { default as UserSearchList } from "./UserSearchList";
+export { default as FriendRequestsList } from "./FriendRequestsList";

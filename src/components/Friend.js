@@ -5,7 +5,7 @@ import { HiOutlineUserAdd } from "react-icons/hi";
 import { useStateContext } from "../lib/context";
 
 function Friend({ friendInfo }) {
-  const { searchingUser, friendList } = useStateContext();
+  const { friendList } = useStateContext();
 
   const isInFriendList = friendList.find((o) => o._id === friendInfo._id);
 
@@ -39,5 +39,5 @@ const InteriorDiv = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 `;

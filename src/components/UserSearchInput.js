@@ -5,7 +5,8 @@ import { useStateContext } from "../lib/context";
 
 function UserSearchInput() {
   const [value, setValue] = useState("");
-  const { setSearchingUser, setSearchUserResult } = useStateContext();
+  const { setSearchingUser, setSearchUserResult, setFriendRequestView } =
+    useStateContext();
 
   function getFormValue(elements, name) {
     return elements[name]?.value;
@@ -23,6 +24,7 @@ function UserSearchInput() {
       .SearchUser({ pseudo: pseudo })
       .then((res) => {
         setValue("");
+        setFriendRequestView(false);
         setSearchingUser(true);
         setSearchUserResult(res);
       })
