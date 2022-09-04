@@ -54,6 +54,18 @@ export const StateContext = ({ children }) => {
     });
   }
 
+  async function AcceptFriendRequest(body) {
+    await services.AcceptFriendRequest(body).then((result) => {
+      console.log(result);
+    });
+  }
+  async function RejectFriendRequest(body) {
+    console.log(body);
+    await services.RejectFriendRequest(body).then((result) => {
+      console.log(result);
+    });
+  }
+
   return (
     <Context.Provider
       value={{
@@ -73,6 +85,8 @@ export const StateContext = ({ children }) => {
         setFriendRequestView,
         friendRequestList,
         fetchFriendRequestList,
+        AcceptFriendRequest,
+        RejectFriendRequest,
       }}
     >
       {children}

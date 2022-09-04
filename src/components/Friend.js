@@ -2,12 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineUserAdd, HiOutlineCheck } from "react-icons/hi";
-import { MdScheduleSend } from "react-icons/md";
+import { MdScheduleSend, MdOutlineClose } from "react-icons/md";
 import { useStateContext } from "../lib/context";
 import services from "../lib/api";
 
 function Friend({ friendInfo }) {
-  const { friendList, currentUserInfo, friendRequestList } = useStateContext();
+  const {
+    friendList,
+    currentUserInfo,
+    friendRequestList,
+    AcceptFriendRequest,
+    RejectFriendRequest,
+  } = useStateContext();
 
   const isInFriendList = friendList.find((o) => o._id === friendInfo._id);
   const isSearchResultInFriendRequest = friendRequestList.find(
@@ -21,16 +27,32 @@ function Friend({ friendInfo }) {
     recipient: friendInfo._id,
   };
 
+  const bodyForFriendRequestAccept = {
+    requester: currentUserInfo._id,
+    recipient: friendInfo.recipient?._id,
+  };
+
   let ActionButton;
+  let RejectFriend;
 
   if (isSearchResultInFriendRequest?.status === 1) {
     ActionButton = <MdScheduleSend />;
   } else if (isInFriendRequest?.status === 1) {
     ActionButton = <MdScheduleSend />;
   } else if (isInFriendRequest?.status === 2) {
-    ActionButton = <HiOutlineCheck />;
+    ActionButton = (
+      <HiOutlineCheck
+        onClick={() => AcceptFriendRequest(bodyForFriendRequestAccept)}
+      />
+    );
+    RejectFriend = (
+      <MdOutlineClose
+        onClick={() => RejectFriendRequest(bodyForFriendRequestAccept)}
+      />
+    );
   } else if (isSearchResultInFriendRequest) {
-    ActionButton = <HiOutlineCheck />;
+    ActionButton = <HiOutlineCheck onClick={() => AcceptFriendRequest(body)} />;
+    RejectFriend = <MdOutlineClose onClick={() => RejectFriendRequest(body)} />;
   } else if (!isInFriendList) {
     ActionButton = (
       <HiOutlineUserAdd
@@ -46,6 +68,7 @@ function Friend({ friendInfo }) {
       <InteriorDiv>
         <CgProfile /> {friendInfo.pseudo || friendInfo.recipient.pseudo}
         {ActionButton}
+        {RejectFriend}
       </InteriorDiv>
     </FriendWrapper>
   );

@@ -76,6 +76,23 @@ const services = {
       })
       .then((res) => res.data);
   },
+
+  AcceptFriendRequest(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/accept-friend-request", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+  RejectFriendRequest(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/reject-friend-request", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
