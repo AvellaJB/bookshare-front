@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Friend } from "../components";
 import { useStateContext } from "../lib/context";
+import { useNavigate } from "react-router-dom";
 
 function FriendList() {
   const { fetchFriendList, friendList } = useStateContext();

@@ -14,6 +14,7 @@ export const StateContext = ({ children }) => {
   const [searchUserResult, setSearchUserResult] = useState([]);
   const [friendRequestView, setFriendRequestView] = useState(false);
   const [friendRequestList, setFriendRequestList] = useState([]);
+  const [friendsBookList, setFriendsBookList] = useState([]);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -60,9 +61,14 @@ export const StateContext = ({ children }) => {
     });
   }
   async function RejectFriendRequest(body) {
-    console.log(body);
     await services.RejectFriendRequest(body).then((result) => {
       console.log(result);
+    });
+  }
+
+  async function getFriendsBookList(body) {
+    await services.getFriendsBookList(body).then((result) => {
+      setFriendsBookList(result);
     });
   }
 
@@ -87,6 +93,9 @@ export const StateContext = ({ children }) => {
         fetchFriendRequestList,
         AcceptFriendRequest,
         RejectFriendRequest,
+        getFriendsBookList,
+        friendsBookList,
+        setFriendsBookList,
       }}
     >
       {children}

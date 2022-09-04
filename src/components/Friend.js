@@ -5,8 +5,11 @@ import { HiOutlineUserAdd, HiOutlineCheck } from "react-icons/hi";
 import { MdScheduleSend, MdOutlineClose } from "react-icons/md";
 import { useStateContext } from "../lib/context";
 import services from "../lib/api";
+import { useNavigate } from "react-router-dom";
 
 function Friend({ friendInfo }) {
+  const navigate = useNavigate();
+
   const {
     friendList,
     currentUserInfo,
@@ -66,7 +69,8 @@ function Friend({ friendInfo }) {
   return (
     <FriendWrapper>
       <InteriorDiv>
-        <CgProfile /> {friendInfo.pseudo || friendInfo.recipient.pseudo}
+        <CgProfile onClick={() => navigate(`/${friendInfo._id}`)} />{" "}
+        {friendInfo.pseudo || friendInfo.recipient.pseudo}
         {ActionButton}
         {RejectFriend}
       </InteriorDiv>

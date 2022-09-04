@@ -6,6 +6,7 @@ import {
   Profile,
   Friends,
   Lendings,
+  FriendsLibrary,
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/lendings" element={<Lendings />} />
+        <Route path="/:id" element={<FriendsLibrary />} />
       </Routes>
       {connected && <Navbar />}
     </div>

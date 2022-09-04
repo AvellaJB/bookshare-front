@@ -1,12 +1,20 @@
 import React from "react";
+import { useEffect } from "react";
 import { Navbar, ISBNInput, Library } from "../components";
 import styled from "styled-components";
+import { useStateContext } from "../lib/context";
 
 function Home() {
+  const { fetchAndSetBooks, bookListCurrentUser } = useStateContext();
+
+  useEffect(() => {
+    fetchAndSetBooks();
+  }, []);
+
   return (
     <HomeWrapper>
       <h2>Ma bibliothèque</h2>
-      <Library userType={"user"} />
+      <Library userType={"user"} bookListCurrentUser={bookListCurrentUser} />
       <ISBNInput />
       <Navbar />
     </HomeWrapper>

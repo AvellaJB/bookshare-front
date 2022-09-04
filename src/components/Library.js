@@ -4,15 +4,7 @@ import { useStateContext } from "../lib/context";
 import SmartBook from "./SmartBook";
 import styled from "styled-components";
 
-function Library({ userType }) {
-  /* La librairie est un composant standard, je doit pouvoir lui passer en props l'utilisateur concerné
-si c'est notre utlisateur ou la biblothèque d'un autre utilisateur.*/
-  const { fetchAndSetBooks, bookListCurrentUser } = useStateContext();
-
-  useEffect(() => {
-    fetchAndSetBooks();
-  }, []);
-
+function Library({ bookListCurrentUser }) {
   return (
     <LibraryWrapper>
       {bookListCurrentUser.map((book) => {

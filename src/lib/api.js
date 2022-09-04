@@ -93,6 +93,15 @@ const services = {
       })
       .then((res) => res.data);
   },
+
+  getFriendsBookList(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/friends-library", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
