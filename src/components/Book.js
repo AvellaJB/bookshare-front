@@ -1,7 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useStateContext } from "../lib/context";
 
-function Book({ bookDetails }) {
+function Book({ bookDetails, owner, bookId }) {
+  const navigate = useNavigate();
+  const { currentUserInfo } = useStateContext();
+
+  let UpdateButton;
+
+  if (owner === currentUserInfo._id) {
+    UpdateButton = (
+      <button
+        onClick={() =>
+          navigate(`/book-details/${bookId}/${bookDetails.isbn_13}`)
+        }
+      >
+        Modifier
+      </button>
+    );
+  } else if (owner !== currentUserInfo._id) {
+    UpdateButton = (
+      <button
+        onClick={() =>
+          navigate(`/book-details/${bookId}/${bookDetails.isbn_13}`)
+        }
+      >
+        Commentaire
+      </button>
+    );
+  }
   return (
     <BookWrapper>
       <img
@@ -9,6 +37,7 @@ function Book({ bookDetails }) {
         alt=""
       />
       <p>{bookDetails.title}</p>
+      {UpdateButton}
     </BookWrapper>
   );
 }

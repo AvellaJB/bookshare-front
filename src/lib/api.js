@@ -102,6 +102,23 @@ const services = {
       })
       .then((res) => res.data);
   },
+  getBookDetails(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/find-book", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+
+  CommentBook(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/comment-book", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;

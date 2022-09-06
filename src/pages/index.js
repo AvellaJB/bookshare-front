@@ -6,3 +6,4 @@ export { default as Profile } from "./Profile";
 export { default as Lendings } from "./Lendings";
 export { default as Friends } from "./Friends";
 export { default as FriendsLibrary } from "./FriendsLibrary";
+export { default as BookDetails } from "./BookDetails";

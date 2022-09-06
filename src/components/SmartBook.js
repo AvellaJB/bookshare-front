@@ -3,7 +3,7 @@ import ISBNApi from "../lib/ISBNApi";
 import { useState } from "react";
 import Book from "./Book";
 
-function SmartBook({ ISBN }) {
+function SmartBook({ ISBN, owner, bookId }) {
   const [book, setBook] = useState([]);
 
   function fetchOpenLibraryInfo() {
@@ -16,7 +16,7 @@ function SmartBook({ ISBN }) {
     fetchOpenLibraryInfo();
   }, []);
 
-  return <Book bookDetails={book} />;
+  return <Book bookDetails={book} owner={owner} bookId={bookId} />;
 }
 
 export default SmartBook;

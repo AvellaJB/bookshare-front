@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import services from "./api";
-import ISBNApi from "./ISBNApi";
 
 const Context = createContext();
 
@@ -15,6 +14,8 @@ export const StateContext = ({ children }) => {
   const [friendRequestView, setFriendRequestView] = useState(false);
   const [friendRequestList, setFriendRequestList] = useState([]);
   const [friendsBookList, setFriendsBookList] = useState([]);
+  const [bookDetails, setBookDetails] = useState({});
+  const [isLoading, setLoading] = useState(true);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -72,6 +73,16 @@ export const StateContext = ({ children }) => {
     });
   }
 
+  async function getBookDetails(body) {
+    await services
+      .getBookDetails(body)
+      .then((result) => {
+        setBookDetails(result);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <Context.Provider
       value={{
@@ -96,6 +107,9 @@ export const StateContext = ({ children }) => {
         getFriendsBookList,
         friendsBookList,
         setFriendsBookList,
+        getBookDetails,
+        bookDetails,
+        isLoading,
       }}
     >
       {children}

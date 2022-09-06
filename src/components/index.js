@@ -13,3 +13,5 @@ export { default as FriendList } from "./FriendList";
 export { default as UserSearchList } from "./UserSearchList";
 export { default as FriendRequestsList } from "./FriendRequestsList";
 export { default as FriendResponse } from "./FriendResponse";
+export { default as Comment } from "./Comment";
+export { default as CommentInput } from "./CommentInput";

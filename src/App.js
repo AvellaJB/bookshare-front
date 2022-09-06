@@ -7,6 +7,7 @@ import {
   Friends,
   Lendings,
   FriendsLibrary,
+  BookDetails,
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="/lendings" element={<Lendings />} />
         <Route path="/:id" element={<FriendsLibrary />} />
+        <Route path="/book-details/:id/:isbn" element={<BookDetails />} />
       </Routes>
       {connected && <Navbar />}
     </div>

@@ -7,10 +7,15 @@ import styled from "styled-components";
 function Library({ bookListCurrentUser }) {
   return (
     <LibraryWrapper>
-      {bookListCurrentUser.map((book) => {
+      {bookListCurrentUser?.map((book) => {
         return (
           <div>
-            <SmartBook ISBN={book.ISBN} key={book._id} />
+            <SmartBook
+              ISBN={book.ISBN}
+              key={book._id}
+              owner={book.user}
+              bookId={book._id}
+            />
           </div>
         );
       })}
