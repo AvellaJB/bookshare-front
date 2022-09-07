@@ -53,7 +53,7 @@ function BookDetails() {
         <div className="reviewTitle">Mon avis sur ce livre: </div>
         <div className="reviewUser">{bookDetails.userReview}</div>
       </ReviewStyle>
-      <CommentInput />
+      <CommentInput bookDetails={bookDetails} />
       {bookDetails.comments.map((comment) => {
         return <Comment commentInfo={comment} key={comment._id} />;
       })}

@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import services from "../lib/api";
+import { useStateContext } from "../lib/context";
 
-function CommentInput() {
+function CommentInput({ bookDetails }) {
   const [value, setValue] = useState("");
+  const { currentUserInfo } = useStateContext();
 
   function getFormValue(elements, name) {
     return elements[name]?.value;
@@ -17,6 +19,13 @@ function CommentInput() {
       alert("Ajouter un commentaire");
       return;
     }
+    const body = {
+      bookId: bookDetails._id,
+      comment: comment,
+      friend: currentUserInfo._id,
+    };
+
+    services.CommentBook(body).then((res) => console.log(res));
   }
 
   return (

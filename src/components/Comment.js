@@ -4,11 +4,14 @@ import { useStateContext } from "../lib/context";
 import services from "../lib/api";
 
 function Comment({ commentInfo }) {
-  const { currentUserInfo } = useStateContext();
+  const { currentUserInfo, bookDetails } = useStateContext();
 
   let DeleteButton;
 
-  if (currentUserInfo._id === commentInfo.user._id) {
+  if (
+    currentUserInfo._id === commentInfo.user._id ||
+    bookDetails.user._id === currentUserInfo._id
+  ) {
     DeleteButton = (
       <button
         onClick={() => {
@@ -21,6 +24,8 @@ function Comment({ commentInfo }) {
       </button>
     );
   }
+
+  console.log(bookDetails.user._id);
 
   return (
     <Wrapper>
