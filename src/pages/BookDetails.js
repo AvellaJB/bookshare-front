@@ -8,7 +8,8 @@ import { Comment, CommentInput, Navbar, ReviewInput } from "../components";
 
 function BookDetails() {
   const [openLibrary, setOpenLibrary] = useState();
-  const { bookDetails, getBookDetails, isLoading } = useStateContext();
+  const { bookDetails, getBookDetails, isLoading, currentUserInfo } =
+    useStateContext();
   const [ISBNStillLoading, setISBNLoading] = useState(true);
 
   const params = useParams();
@@ -29,6 +30,20 @@ function BookDetails() {
 
   if (isLoading || ISBNStillLoading) {
     return <div>Loading...</div>;
+  }
+
+  let userReview;
+  if (currentUserInfo._id === bookDetails.user._id) {
+    userReview = <ReviewInput bookDetails={bookDetails} />;
+  }
+
+  let friendList = bookDetails?.user.friends;
+  const isFriend = friendList.find((friend) => friend === currentUserInfo._id);
+
+  let InputComment;
+
+  if (isFriend || bookDetails.user._id === currentUserInfo._id) {
+    InputComment = <CommentInput bookDetails={bookDetails} />;
   }
 
   return (
@@ -53,8 +68,8 @@ function BookDetails() {
         <div className="reviewTitle">Mon avis sur ce livre: </div>
         <div className="reviewUser">{bookDetails.userReview}</div>
       </ReviewStyle>
-      <ReviewInput bookDetails={bookDetails} />
-      <CommentInput bookDetails={bookDetails} />
+      {userReview}
+      {InputComment}
       {bookDetails.comments.map((comment) => {
         return <Comment commentInfo={comment} key={comment._id} />;
       })}
