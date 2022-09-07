@@ -1,11 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { useStateContext } from "../lib/context";
+import services from "../lib/api";
 
 function Comment({ commentInfo }) {
+  const { currentUserInfo } = useStateContext();
+
+  let DeleteButton;
+
+  if (currentUserInfo._id === commentInfo.user._id) {
+    DeleteButton = (
+      <button
+        onClick={() => {
+          services
+            .DeleteComment({ commentId: commentInfo._id })
+            .then((res) => console.log(res));
+        }}
+      >
+        Delete
+      </button>
+    );
+  }
+
   return (
     <Wrapper>
       <Friend>{commentInfo.user.pseudo}</Friend>
       <CommentStyle>{commentInfo.comment}</CommentStyle>
+      {DeleteButton}
     </Wrapper>
   );
 }

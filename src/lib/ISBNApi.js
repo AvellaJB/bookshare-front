@@ -8,6 +8,12 @@ const ISBNApi = {
   getDetailsFromISBN(ISBN) {
     return base.get(`${ISBN}.json`).then((res) => res.data);
   },
+
+  getAuthorDetails(URL) {
+    return base
+      .get(`https://openlibrary.org${URL}.json`)
+      .then((res) => res.data);
+  },
 };
 
 export default ISBNApi;

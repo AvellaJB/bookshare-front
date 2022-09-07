@@ -15,6 +15,7 @@ function Home() {
     <HomeWrapper>
       <h2>Ma bibliothèque</h2>
       <Library userType={"user"} bookListCurrentUser={bookListCurrentUser} />
+      <div>.</div>
       <ISBNInput />
       <Navbar />
     </HomeWrapper>

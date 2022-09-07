@@ -33,4 +33,5 @@ const LibraryWrapper = styled.div`
   padding: 0.2rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5rem;
 `;

@@ -10,6 +10,7 @@ function BookDetails() {
   const [openLibrary, setOpenLibrary] = useState();
   const { bookDetails, getBookDetails, isLoading } = useStateContext();
   const [ISBNStillLoading, setISBNLoading] = useState(true);
+
   const params = useParams();
 
   function fetchOpenLibraryInfo() {
@@ -40,15 +41,18 @@ function BookDetails() {
           />
         </BookCover>
         <BookDetailsInfos>
-          <span>{openLibrary.title}</span>
+          <span className="title">{openLibrary.title}</span>
+          <span>{openLibrary.number_of_pages} pages.</span>
         </BookDetailsInfos>
       </BookWrapper>
 
       <Proprio>
         <h2>{bookDetails.user.pseudo}</h2>
       </Proprio>
-      <div>Mon avis sur ce livre: </div>
-      <div>{bookDetails.userReview}</div>
+      <ReviewStyle>
+        <div className="reviewTitle">Mon avis sur ce livre: </div>
+        <div className="reviewUser">{bookDetails.userReview}</div>
+      </ReviewStyle>
       <CommentInput />
       {bookDetails.comments.map((comment) => {
         return <Comment commentInfo={comment} key={comment._id} />;
@@ -72,7 +76,7 @@ const BookWrapper = styled.div`
 
 const BookCover = styled.div`
   background-color: aliceblue;
-  width: 40%;
+  width: 50%;
   height: 100%;
   img {
     width: 100%;
@@ -83,10 +87,26 @@ const BookCover = styled.div`
 
 const BookDetailsInfos = styled.div`
   width: 70%;
-  background-color: blue;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-weight: bold;
+  }
 `;
 
 const Proprio = styled.div`
   text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+`;
+
+const ReviewStyle = styled.div`
+  margin-bottom: 1rem;
+  .reviewTitle {
+    font-weight: bold;
+  }
+  .reviewUser {
+    margin-top: 1rem;
+  }
 `;

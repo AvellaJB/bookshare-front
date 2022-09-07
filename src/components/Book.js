@@ -46,8 +46,8 @@ export default Book;
 
 const BookWrapper = styled.div`
   position: relative;
-  width: 100px;
-  height: 200px;
+  width: 150px;
+  height: 300px;
   z-index: 2;
   img {
     width: 100%;
@@ -57,5 +57,8 @@ const BookWrapper = styled.div`
   p {
     font-weight: bold;
     font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
