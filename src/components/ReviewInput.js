@@ -4,7 +4,7 @@ import services from "../lib/api";
 import { useStateContext } from "../lib/context";
 import { useParams } from "react-router-dom";
 
-function CommentInput({ bookDetails }) {
+function ReviewInput({ bookDetails }) {
   const params = useParams();
   const [value, setValue] = useState("");
   const { currentUserInfo, getBookDetails } = useStateContext();
@@ -16,20 +16,20 @@ function CommentInput({ bookDetails }) {
   function handleSubmit(e) {
     e.preventDefault();
     const elements = e.target.elements;
-    const comment = getFormValue(elements, "comment");
-    if (!comment) {
-      alert("Ajouter un commentaire");
+    const review = getFormValue(elements, "review");
+    if (!review) {
+      alert("Ajouter votre revue");
       return;
     }
     const body = {
-      bookId: bookDetails._id,
-      comment: comment,
-      friend: currentUserInfo._id,
+      id: bookDetails._id,
+      userReview: review,
     };
 
-    services
-      .CommentBook(body)
-      .then((res) => getBookDetails({ bookId: params.id }));
+    services.reviewBook(body).then((res) => {
+      getBookDetails({ bookId: params.id });
+      setValue("");
+    });
   }
 
   return (
@@ -37,8 +37,8 @@ function CommentInput({ bookDetails }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="comment"
-          placeholder="Commentaire"
+          name="review"
+          placeholder="Mon avis"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -48,4 +48,4 @@ function CommentInput({ bookDetails }) {
   );
 }
 
-export default CommentInput;
+export default ReviewInput;

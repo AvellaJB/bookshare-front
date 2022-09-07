@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useStateContext } from "../lib/context";
 import services from "../lib/api";
+import { useParams } from "react-router-dom";
 
 function Comment({ commentInfo }) {
-  const { currentUserInfo, bookDetails } = useStateContext();
-
+  const { currentUserInfo, bookDetails, getBookDetails } = useStateContext();
+  const params = useParams();
   let DeleteButton;
 
   if (
@@ -17,15 +18,13 @@ function Comment({ commentInfo }) {
         onClick={() => {
           services
             .DeleteComment({ commentId: commentInfo._id })
-            .then((res) => console.log(res));
+            .then((res) => getBookDetails({ bookId: params.id }));
         }}
       >
         Delete
       </button>
     );
   }
-
-  console.log(bookDetails.user._id);
 
   return (
     <Wrapper>

@@ -4,7 +4,7 @@ import { useStateContext } from "../lib/context";
 import { useParams } from "react-router-dom";
 import ISBNApi from "../lib/ISBNApi";
 import styled from "styled-components";
-import { Comment, CommentInput, Navbar } from "../components";
+import { Comment, CommentInput, Navbar, ReviewInput } from "../components";
 
 function BookDetails() {
   const [openLibrary, setOpenLibrary] = useState();
@@ -53,6 +53,7 @@ function BookDetails() {
         <div className="reviewTitle">Mon avis sur ce livre: </div>
         <div className="reviewUser">{bookDetails.userReview}</div>
       </ReviewStyle>
+      <ReviewInput bookDetails={bookDetails} />
       <CommentInput bookDetails={bookDetails} />
       {bookDetails.comments.map((comment) => {
         return <Comment commentInfo={comment} key={comment._id} />;

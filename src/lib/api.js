@@ -127,6 +127,14 @@ const services = {
       })
       .then((res) => res.data);
   },
+  reviewBook(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/review-book", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
