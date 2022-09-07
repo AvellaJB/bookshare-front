@@ -16,6 +16,7 @@ export const StateContext = ({ children }) => {
   const [friendsBookList, setFriendsBookList] = useState([]);
   const [bookDetails, setBookDetails] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [oneUserDetails, setOneUserDetails] = useState(true);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -83,6 +84,15 @@ export const StateContext = ({ children }) => {
       .catch((err) => console.log(err));
   }
 
+  async function getOneUserDetails(body) {
+    await services
+      .getOneUser(body)
+      .then((result) => {
+        setOneUserDetails(result);
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <Context.Provider
       value={{
@@ -110,6 +120,8 @@ export const StateContext = ({ children }) => {
         getBookDetails,
         bookDetails,
         isLoading,
+        getOneUserDetails,
+        oneUserDetails,
       }}
     >
       {children}

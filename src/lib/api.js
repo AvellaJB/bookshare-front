@@ -135,6 +135,14 @@ const services = {
       })
       .then((res) => res.data);
   },
+  getOneUser(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post("/get-one-user", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
