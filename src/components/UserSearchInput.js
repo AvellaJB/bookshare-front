@@ -82,6 +82,10 @@ const Input = styled.input`
   height: 2rem;
   border-radius: 10px;
   text-align: center;
+  @media screen and (min-width: 900px) {
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
 `;
 
 const ButtonDiv = styled.div`

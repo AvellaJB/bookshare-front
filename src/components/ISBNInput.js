@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import services from "../lib/api";
+import { useStateContext } from "../lib/context";
 
 function ISBNInput() {
+  const { fetchAndSetBooks } = useStateContext();
+
   const [value, setValue] = useState("");
 
   function getFormValue(elements, name) {
@@ -21,6 +24,7 @@ function ISBNInput() {
       .AddBook({ ISBN })
       .then(() => {
         setValue("");
+        fetchAndSetBooks();
       })
       .catch((err) => console.log(err));
   }
@@ -76,6 +80,10 @@ const Input = styled.input`
   height: 2rem;
   border-radius: 10px;
   text-align: center;
+  @media screen and (min-width: 900px) {
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
 `;
 
 const ButtonDiv = styled.div`

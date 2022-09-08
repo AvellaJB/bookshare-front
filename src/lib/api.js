@@ -143,6 +143,15 @@ const services = {
       })
       .then((res) => res.data);
   },
+
+  deleteBook(id) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .delete(`/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;

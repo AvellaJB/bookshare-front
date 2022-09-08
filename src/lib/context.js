@@ -93,6 +93,13 @@ export const StateContext = ({ children }) => {
       .catch((err) => console.log(err));
   }
 
+  async function DeleteBook(id) {
+    await services
+      .deleteBook(id)
+      .then((res) => fetchAndSetBooks())
+      .catch((err) => console.log(err));
+  }
+
   return (
     <Context.Provider
       value={{
@@ -122,6 +129,7 @@ export const StateContext = ({ children }) => {
         isLoading,
         getOneUserDetails,
         oneUserDetails,
+        DeleteBook,
       }}
     >
       {children}

@@ -66,10 +66,25 @@ function Friend({ friendInfo }) {
     );
   }
 
+  if (currentUserInfo._id === friendInfo._id) {
+    ActionButton = "";
+  }
+
+  let LinkToProfile;
+
+  if (currentUserInfo._id != friendInfo._id) {
+    LinkToProfile = (
+      <CgProfile onClick={() => navigate(`/${friendInfo._id}`)} />
+    );
+  } else {
+    LinkToProfile = <CgProfile onClick={() => navigate(`/home`)} />;
+  }
+
   return (
     <FriendWrapper>
       <InteriorDiv>
-        <CgProfile onClick={() => navigate(`/${friendInfo._id}`)} />{" "}
+        {LinkToProfile}
+        {/* <CgProfile onClick={() => navigate(`/${friendInfo._id}`)} />{" "} */}
         {friendInfo.pseudo || friendInfo.recipient.pseudo}
         {ActionButton}
         {RejectFriend}

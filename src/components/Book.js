@@ -5,9 +5,10 @@ import { useStateContext } from "../lib/context";
 
 function Book({ bookDetails, owner, bookId }) {
   const navigate = useNavigate();
-  const { currentUserInfo } = useStateContext();
+  const { currentUserInfo, DeleteBook } = useStateContext();
 
   let UpdateButton;
+  let DeleteButton;
 
   if (owner === currentUserInfo._id) {
     UpdateButton = (
@@ -19,6 +20,9 @@ function Book({ bookDetails, owner, bookId }) {
         Modifier
       </button>
     );
+    DeleteButton = (
+      <button onClick={() => DeleteBook(bookId)}>Supprimer</button>
+    );
   } else if (owner !== currentUserInfo._id) {
     UpdateButton = (
       <button
@@ -29,6 +33,7 @@ function Book({ bookDetails, owner, bookId }) {
         Commentaire
       </button>
     );
+    DeleteButton = "";
   }
   return (
     <BookWrapper>
@@ -38,6 +43,7 @@ function Book({ bookDetails, owner, bookId }) {
       />
       <p>{bookDetails.title}</p>
       {UpdateButton}
+      {DeleteButton}
     </BookWrapper>
   );
 }
