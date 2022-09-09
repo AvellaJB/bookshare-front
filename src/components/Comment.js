@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useStateContext } from "../lib/context";
 import services from "../lib/api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Comment({ commentInfo }) {
   const { currentUserInfo, bookDetails, getBookDetails } = useStateContext();
   const params = useParams();
+  const navigate = useNavigate();
   let DeleteButton;
 
   if (
@@ -28,8 +30,15 @@ function Comment({ commentInfo }) {
 
   return (
     <Wrapper>
-      <Friend>{commentInfo.user.pseudo}</Friend>
-      <CommentStyle>{commentInfo.comment}</CommentStyle>
+      <CommentWrapper>
+        <Friend onClick={() => navigate(`/${commentInfo.user._id}`)}>
+          {commentInfo.user.pseudo} :
+        </Friend>
+        <CommentStyle>
+          <br />
+          {commentInfo.comment}
+        </CommentStyle>
+      </CommentWrapper>
       {DeleteButton}
     </Wrapper>
   );
@@ -38,18 +47,33 @@ function Comment({ commentInfo }) {
 export default Comment;
 
 const Wrapper = styled.div`
-  padding: 0.3rem;
-  background-color: aliceblue;
+  display: flex;
+  padding: 0.5rem;
+  background-color: white;
   border-radius: 12px;
   margin-bottom: 0.5rem;
+  justify-content: space-between;
+  button {
+    background-color: #ffc8c8;
+    border: none;
+    border-radius: 12px;
+    padding: 0.2rem;
+    margin-left: 3rem;
+    cursor: pointer;
+  }
 `;
 
 const Friend = styled.div`
   font-weight: bold;
-  background-color: aliceblue;
+  background-color: white;
+  cursor: pointer;
 `;
 
 const CommentStyle = styled.div`
   font-style: italic;
-  background-color: aliceblue;
+  background-color: white;
+`;
+
+const CommentWrapper = styled.div`
+  display: flex;
 `;

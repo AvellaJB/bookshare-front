@@ -46,6 +46,8 @@ function BookDetails() {
     InputComment = <CommentInput bookDetails={bookDetails} />;
   }
 
+  console.log(openLibrary);
+
   return (
     <Wrapper>
       <BookWrapper>
@@ -57,7 +59,9 @@ function BookDetails() {
         </BookCover>
         <BookDetailsInfos>
           <span className="title">{openLibrary.title}</span>
-          <span>{openLibrary.number_of_pages} pages.</span>
+          {openLibrary.number_of_pages && (
+            <span>{openLibrary.number_of_pages} pages.</span>
+          )}
         </BookDetailsInfos>
       </BookWrapper>
 
@@ -69,10 +73,10 @@ function BookDetails() {
         <div className="reviewUser">{bookDetails.userReview}</div>
       </ReviewStyle>
       {userReview}
-      {InputComment}
       {bookDetails.comments.map((comment) => {
         return <Comment commentInfo={comment} key={comment._id} />;
       })}
+      {InputComment}
       <Navbar />
     </Wrapper>
   );
@@ -88,16 +92,27 @@ const BookWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 30vh;
+  @media screen and (min-width: 1200px) {
+    justify-content: center;
+    padding: 2rem;
+  }
 `;
 
 const BookCover = styled.div`
-  background-color: aliceblue;
   width: 50%;
   height: 100%;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media screen and (min-width: 1200px) {
+    width: auto;
+    img {
+      height: 250px;
+      width: auto;
+    }
+    background-color: transparent;
   }
 `;
 
@@ -108,6 +123,14 @@ const BookDetailsInfos = styled.div`
   flex-direction: column;
   .title {
     font-weight: bold;
+  }
+  @media screen and (min-width: 1200px) {
+    width: auto;
+    img {
+      height: 250px;
+      width: auto;
+    }
+    background-color: transparent;
   }
 `;
 

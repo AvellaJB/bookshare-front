@@ -13,19 +13,23 @@ function Book({ bookDetails, owner, bookId }) {
   if (owner === currentUserInfo._id) {
     UpdateButton = (
       <button
+        className="consult"
         onClick={() =>
           navigate(`/book-details/${bookId}/${bookDetails.isbn_13}`)
         }
       >
-        Modifier
+        Consulter
       </button>
     );
     DeleteButton = (
-      <button onClick={() => DeleteBook(bookId)}>Supprimer</button>
+      <button className="delete" onClick={() => DeleteBook(bookId)}>
+        Supprimer
+      </button>
     );
   } else if (owner !== currentUserInfo._id) {
     UpdateButton = (
       <button
+        className="consult"
         onClick={() =>
           navigate(`/book-details/${bookId}/${bookDetails.isbn_13}`)
         }
@@ -42,8 +46,10 @@ function Book({ bookDetails, owner, bookId }) {
         alt=""
       />
       <p>{bookDetails.title}</p>
-      {UpdateButton}
-      {DeleteButton}
+      <ButtonWrapper>
+        {UpdateButton}
+        {DeleteButton}
+      </ButtonWrapper>
     </BookWrapper>
   );
 }
@@ -55,6 +61,7 @@ const BookWrapper = styled.div`
   width: 150px;
   height: 300px;
   z-index: 2;
+
   img {
     width: 100%;
     height: 70%;
@@ -66,5 +73,25 @@ const BookWrapper = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  button {
+    border: none;
+    border-radius: 12px;
+    padding: 0.2rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+  .consult {
+    background-color: #fffdc0;
+  }
+  .delete {
+    background-color: #ffc8c8;
   }
 `;

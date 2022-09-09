@@ -9,10 +9,14 @@ import {
 } from "../components";
 import { useStateContext } from "../lib/context";
 import styled from "styled-components";
+import { useState } from "react";
 
 function Friends() {
   const { searchingUser, setFriendRequestView, friendRequestView } =
     useStateContext();
+
+  const [underLineFriends, setUnderLineFriends] = useState("");
+  const [underLineRequest, setUnderLineRequest] = useState("");
 
   let title;
   if (searchingUser) {
@@ -25,15 +29,21 @@ function Friends() {
     title = (
       <Titles>
         <h2
+          style={{ textDecoration: underLineFriends }}
           onClick={() => {
             setFriendRequestView(false);
+            setUnderLineFriends("underline");
+            setUnderLineRequest("");
           }}
         >
           Mes amis
         </h2>
         <h2
+          style={{ textDecoration: underLineRequest }}
           onClick={() => {
             setFriendRequestView(true);
+            setUnderLineFriends("");
+            setUnderLineRequest("underline");
           }}
         >
           Demandes d'amis
