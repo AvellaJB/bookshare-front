@@ -4,7 +4,13 @@ import { useStateContext } from "../lib/context";
 import { useParams } from "react-router-dom";
 import ISBNApi from "../lib/ISBNApi";
 import styled from "styled-components";
-import { Comment, CommentInput, Navbar, ReviewInput } from "../components";
+import {
+  Comment,
+  CommentInput,
+  Navbar,
+  ReviewInput,
+  BorrowButton,
+} from "../components";
 
 function BookDetails() {
   const [openLibrary, setOpenLibrary] = useState();
@@ -46,7 +52,16 @@ function BookDetails() {
     InputComment = <CommentInput bookDetails={bookDetails} />;
   }
 
-  console.log(openLibrary);
+  let BorrowBtn;
+
+  if (
+    bookDetails?.book_status === undefined ||
+    bookDetails?.book_status === 1
+  ) {
+    BorrowBtn = <BorrowButton />;
+  } else {
+    BorrowBtn = <UnavailableButton>Livre indisponible.</UnavailableButton>;
+  }
 
   return (
     <Wrapper>
@@ -64,7 +79,7 @@ function BookDetails() {
           )}
         </BookDetailsInfos>
       </BookWrapper>
-
+      <BorrowButtonDiv>{BorrowBtn}</BorrowButtonDiv>
       <Proprio>
         <h2>{bookDetails.user.pseudo}</h2>
       </Proprio>
@@ -148,4 +163,24 @@ const ReviewStyle = styled.div`
   .reviewUser {
     margin-top: 1rem;
   }
+`;
+
+const UnavailableButton = styled.button`
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border: none;
+  background-color: #ffc8c8;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 10px;
+  width: 10%;
+  @media screen and (max-width: 900px) {
+    width: 30%;
+  }
+`;
+
+const BorrowButtonDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

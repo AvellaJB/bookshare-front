@@ -4,7 +4,13 @@ import { Navbar } from "../components";
 function Lendings() {
   return (
     <div>
-      Lendings <Navbar />
+      <div>
+        <h1>Prêts</h1>
+      </div>
+      <div>
+        <h1>Mes demandes</h1>
+      </div>
+      <Navbar />
     </div>
   );
 }

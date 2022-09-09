@@ -16,3 +16,4 @@ export { default as FriendResponse } from "./FriendResponse";
 export { default as Comment } from "./Comment";
 export { default as CommentInput } from "./CommentInput";
 export { default as ReviewInput } from "./ReviewInput";
+export { default as BorrowButton } from "./BorrowButton";
