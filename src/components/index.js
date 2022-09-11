@@ -17,3 +17,8 @@ export { default as Comment } from "./Comment";
 export { default as CommentInput } from "./CommentInput";
 export { default as ReviewInput } from "./ReviewInput";
 export { default as BorrowButton } from "./BorrowButton";
+export { default as BookRequestList } from "./BookRequestList";
+export { default as BookRequest } from "./BookRequest";
+export { default as BookTrackingList } from "./BookTrackingList";
+export { default as BookLended } from "./BookLended";
+export { default as BookBorrowed } from "./BookBorrowed";

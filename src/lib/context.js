@@ -17,6 +17,9 @@ export const StateContext = ({ children }) => {
   const [bookDetails, setBookDetails] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [oneUserDetails, setOneUserDetails] = useState(true);
+  const [bookRequests, setBookRequests] = useState([]);
+  const [bookTracking, setBookTracking] = useState([]);
+  const [isLoadingTracking, setLoadingTrackingList] = useState(true);
   //Functions :
 
   function fetchAndSetBooks() {
@@ -100,6 +103,36 @@ export const StateContext = ({ children }) => {
       .catch((err) => console.log(err));
   }
 
+  async function getBookRequests(currentUser) {
+    await services
+      .getBookRequestList(currentUser)
+      .then((res) => setBookRequests(res))
+      .catch((err) => console.log(err));
+  }
+
+  async function acceptBorrowRequest(body) {
+    await services
+      .acceptBorrowRequest(body)
+      .then((res) => getBookRequests(currentUserInfo._id))
+      .catch((err) => console.log(err));
+  }
+  async function rejectBorrowRequest(body) {
+    await services
+      .rejectBorrowRequest(body)
+      .then((res) => getBookRequests(currentUserInfo._id))
+      .catch((err) => console.log(err));
+  }
+
+  async function getBorrowedLendedBooks(body) {
+    await services
+      .getBorrowedLendedBooks(body)
+      .then((res) => {
+        setBookTracking(res);
+        setLoadingTrackingList(false);
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <Context.Provider
       value={{
@@ -130,6 +163,13 @@ export const StateContext = ({ children }) => {
         getOneUserDetails,
         oneUserDetails,
         DeleteBook,
+        getBookRequests,
+        bookRequests,
+        acceptBorrowRequest,
+        rejectBorrowRequest,
+        getBorrowedLendedBooks,
+        bookTracking,
+        isLoadingTracking,
       }}
     >
       {children}

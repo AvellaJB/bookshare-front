@@ -56,7 +56,7 @@ function BookDetails() {
 
   if (
     bookDetails?.book_status === undefined ||
-    bookDetails?.book_status === 1
+    bookDetails?.book_status === 0
   ) {
     BorrowBtn = <BorrowButton />;
   } else {
@@ -79,7 +79,10 @@ function BookDetails() {
           )}
         </BookDetailsInfos>
       </BookWrapper>
-      <BorrowButtonDiv>{BorrowBtn}</BorrowButtonDiv>
+      {currentUserInfo._id != bookDetails.user._id && (
+        <BorrowButtonDiv>{BorrowBtn}</BorrowButtonDiv>
+      )}
+
       <Proprio>
         <h2>{bookDetails.user.pseudo}</h2>
       </Proprio>

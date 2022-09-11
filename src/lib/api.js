@@ -161,6 +161,50 @@ const services = {
       })
       .then((res) => res.data);
   },
+
+  getBookRequestList(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post(`/book-request-list`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+
+  acceptBorrowRequest(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post(`/accept-borrow-request`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+
+  rejectBorrowRequest(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post(`/reject-borrow-request`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+
+  getBorrowedLendedBooks(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post(`/books-lended-borrowed`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
+  recoverBook(body) {
+    const token = localStorage.getItem("jwt");
+    return base
+      .post(`/recover-book`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default services;
